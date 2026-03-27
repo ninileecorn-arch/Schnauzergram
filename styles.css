@@ -1,0 +1,26 @@
+.schnauzer {
+  background-color: pink;
+  color: black;
+  font-family: 'Arial', sans-serif;
+}
+
+@media (max-width: 600px) {
+  .schnauzer {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1200px) {
+  .schnauzer {
+    font-size: 16px;
+    padding: 20px;
+  }
+}
+
+@media (min-width: 1201px) {
+  .schnauzer {
+    font-size: 18px;
+    padding: 30px;
+  }
+}
