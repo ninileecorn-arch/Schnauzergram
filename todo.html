@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List Application</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 600px; margin: auto; padding: 20px; }
+        header { text-align: center; }
+        ul { list-style-type: none; padding: 0; }
+        li { background: #fff; margin: 10px 0; padding: 10px; display: flex; justify-content: space-between; align-items: center; }
+        button { background: #28a745; color: white; border: none; padding: 5px 10px; cursor: pointer; }
+        button.delete { background: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>To-Do List</h1>
+            <input type="text" id="taskInput" placeholder="Add a new task..." />
+            <button id="addTaskBtn">Add Task</button>
+        </header>
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const taskList = document.getElementById('taskList');
+
+        // Load tasks from local storage
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.forEach(task => addTaskToDOM(task));
+
+        addTaskBtn.addEventListener('click', () => {
+            const taskText = taskInput.value;
+            if (taskText) {
+                const task = { id: Date.now(), text: taskText };
+                tasks.push(task);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                addTaskToDOM(task);
+                taskInput.value = '';
+            }
+        });
+
+        function addTaskToDOM(task) {
+            const li = document.createElement('li');
+            li.innerHTML = `<span>${task.text}</span> <button class='delete' data-id='${task.id}'>Delete</button>`;
+            taskList.appendChild(li);
+
+            li.querySelector('.delete').addEventListener('click', () => {
+                tasks = tasks.filter(t => t.id !== task.id);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                taskList.removeChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
