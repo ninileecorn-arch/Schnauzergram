@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SchnauzerGram</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>SchnauzerGram</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#explore">Explore</a></li>
+                <li><a href="#notifications">Notifications</a></li>
+                <li><a href="#profile">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <h2>Welcome to SchnauzerGram!</h2>
+            <div id="posts">
+                <!-- User posts will be displayed here -->
+            </div>
+        </section>
+        <section id="explore">
+            <h2>Explore</h2>
+            <div id="explore-posts">
+                <!-- Explore posts functionality goes here -->
+            </div>
+        </section>
+        <section id="notifications">
+            <h2>Notifications</h2>
+            <div id="notification-list">
+                <!-- Notifications will appear here -->
+            </div>
+        </section>
+        <section id="profile">
+            <h2>Profile</h2>
+            <div>
+                <img src="profile-picture.jpg" alt="Profile Picture" />
+                <p>User's Name</p>
+                <button onclick="followUser()">Follow</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 SchnauzerGram. All rights reserved.</p>
+    </footer>
+    <script>
+        // XSS Protection: Use textContent instead of innerHTML or sanitize user inputs.
+        function createPost(content) {
+            const postElement = document.createElement('div');
+            postElement.textContent = content; // Prevent XSS
+            document.getElementById('posts').appendChild(postElement);
+        }
+        function followUser() {
+            // Implement follow functionality here
+            alert('You are now following this user!');
+        }
+    </script>
+</body>
+</html>
